@@ -7,10 +7,6 @@ package com.focusservices.library.commons.datatables.criteria;
 
 import java.util.Objects;
 
-/**
- *
- * @author VOlivares
- */
 public class TuplaClases<A, B> {
     private Class<A> claseOrigen;
     private Class<B> claseDestino;

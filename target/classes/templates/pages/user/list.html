@@ -12,11 +12,11 @@
 <section layout:fragment="content" th:remove="tag">
 <div class="container-fluid">
     <div class="header">
-        <h1 class="header-title" th:inline="text" th:text="#{label.list} + ' ' + 'User'"></h1>
+        <h1 class="header-title" th:inline="text" th:text="'Users'"></h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="#{label.home}"></a></li>
-                <li class="breadcrumb-item active" aria-current="page" th:inline="text" th:text="#{label.list} + ' '  + 'User'"></li>
+                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="'Home'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:inline="text" th:text="'Users'"></li>
             </ol>
         </nav>
     </div>
@@ -28,7 +28,7 @@
                     <th:block th:insert="~{fragments/service-response-painter}" th:remove="tag"/>
                     <div class="card-title col-lg-2">
                         <button class="btn btn waves-effect waves-light btn-block btn-info"
-                                th:inline="text" th:onclick="modalToggle()"><i class="fa fa-plus-circle pr-1"></i>[[#{action.new}]]</button>
+                                th:inline="text" th:onclick="modalToggle()"><i class="fa fa-plus-circle pr-1"></i>New</button>
                     </div>
                     <div class="table-responsive">
                         <table id="tblUser" class="table table-hover table-bordered" width="100%">
@@ -36,10 +36,10 @@
                             <tr>
                                 <th>Acciones</th>
                                 <th>id</th>
-                                <th>firstName</th>
-                                <th>email</th>
-                                <th>lastName</th>
-                                <th>role</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>Role</th>
                             </tr>
                             </thead>
                         </table>
@@ -62,16 +62,16 @@
                         <div class="card-body">
                             <div class="col-sm-12 col-lg-12">
                                 <div class="form-group row mb-3">
-                                    <label for="firstName" class="col-sm-2 text-right control-label col-form-label">firstName</label>
+                                    <label for="firstName" class="col-sm-2 text-right control-label col-form-label">First name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="firstName" name="firstName"
+                                        <input type="text" class="form-control" id="firstName" name="First name"
                                                      placeholder="firstName" 
                                                      maxlength="512" />
                                         <span id="firstNameError" style="display: none; color: red;">Campo obligatorio</span>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="email" class="col-sm-2 text-right control-label col-form-label">email</label>
+                                    <label for="email" class="col-sm-2 text-right control-label col-form-label">Email</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="email" name="email"
                                                      placeholder="email" 
@@ -80,16 +80,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="lastName" class="col-sm-2 text-right control-label col-form-label">lastName</label>
+                                    <label for="lastName" class="col-sm-2 text-right control-label col-form-label">Last name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="lastName" name="lastName"
+                                        <input type="text" class="form-control" id="lastName" name="Last name"
                                                      placeholder="lastName" 
                                                      maxlength="512" />
                                         <span id="lastNameError" style="display: none; color: red;">Campo obligatorio</span>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="role" class="col-sm-2 text-right control-label col-form-label">role</label>
+                                    <label for="role" class="col-sm-2 text-right control-label col-form-label">Role</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="role" name="role"
                                                      placeholder="role" 
@@ -165,11 +165,11 @@
                     , orderable: false
                 }
                 , {
-                    data: 'email'
+                    data: 'lastName'
                     , orderable: false
                 }
                 , {
-                    data: 'lastName'
+                    data: 'email'
                     , orderable: false
                 }
                 , {

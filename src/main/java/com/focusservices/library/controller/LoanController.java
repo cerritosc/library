@@ -105,4 +105,21 @@ public class LoanController {
                 , rows
         );
     }
+
+    //@PreAuthorize(HAS_AUTHORITY_USER)
+    @PostMapping("/return")
+    public @ResponseBody ServiceResponse returnBook(@Valid Loan loan
+            , BindingResult bdResult){
+    	ServiceResponse serviceResponse = new ServiceResponse();
+        String[] parametrosAExcluir = new String[]{
+            ""
+        };
+        if (ValidadorHttp.isPeticionCorrectaExcluyendoCampos(bdResult, parametrosAExcluir)) {
+            serviceResponse = loanService.returnBook(loan);
+        } else{
+             serviceResponse.setSuccess(false);
+             serviceResponse.setMessage("Error al guardar el registro, causas: "+ bdResult.getAllErrors());
+        }
+        return serviceResponse;
+    }
 }

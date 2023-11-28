@@ -11,15 +11,6 @@ import org.javers.core.JaversBuilder;
 import org.springframework.context.annotation.Bean;
 import com.focusservices.library.config.SecurityHelper;
 
-/**
- * Este bean se encarga de configurar el nombre del usuario actual que realiza
- * las acciones a ser logeadas.
- * 
- *  Se ha creado un archivo de propiedades para javers ya que por alguna razon 
- *  no esta tomando el por defecto de Spring...
- *
- * @author RBonilla
- */
 @Configuration
 @PropertySource("classpath:javers.properties")
 public class SimpleAuthorProvider implements AuthorProvider {

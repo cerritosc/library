@@ -3,9 +3,13 @@ package com.focusservices.library.service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.apache.commons.lang3.StringUtils;
+
+import com.focusservices.library.domain.Book;
 import com.focusservices.library.domain.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.focusservices.library.repository.BookRepository;
 import com.focusservices.library.repository.LoanRepository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,20 +34,35 @@ public class LoanServiceImpl implements LoanService {
     @Autowired
     private LoanRepository loanRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public Optional<Loan> findById(Integer id) {
             return loanRepository.findById(id);
     }
 
-
     @Override
     public ServiceResponse saveValidated(Loan loan) {
             ServiceResponse serviceResponse = new ServiceResponse(false, Constants.MSG_EXCEPCION_ACCION);
-            Loan savedLoan = loanRepository.save(loan);
-            serviceResponse.setMessage(Constants.MSG_GUARDADO_EXITOSO);
-            serviceResponse.setSuccess(true);
-            serviceResponse.setData(savedLoan);
+            String resultMsg = Constants.MSG_GUARDADO_EXITOSO;
+            boolean resultFlag = true;
+            Book book = bookRepository.findById(loan.getBookIdDelegate()).get();
+            
+            if(book.getStock()>0) {
+            	book.setStock(book.getStock()-1);
+                bookRepository.save(book);
+                loanRepository.save(loan);
+            }
+            else {
+            	resultMsg = Constants.MSG_BINDING_ERROR;
+                resultFlag = false;
+            }
+            
+            serviceResponse.setMessage(resultMsg);
+            serviceResponse.setSuccess(resultFlag);
+            serviceResponse.setData(null);
 
             return serviceResponse;
     }
@@ -88,4 +107,26 @@ public class LoanServiceImpl implements LoanService {
     public DataTablesOutput<Loan> findAll(DataTablesInput input) {
             return loanRepository.findAll(input);
     }
+
+    @Override
+    public ServiceResponse returnBook(Loan loan) {
+            ServiceResponse serviceResponse = new ServiceResponse(false, Constants.MSG_EXCEPCION_ACCION);
+            Loan savedLoan = findById(loan.getId())
+                    .orElseThrow(() -> new EntidadNoEncontradaException(loan.getId().toString()));
+            
+            Book book = bookRepository.findById(loan.getBookIdDelegate()).get();
+            
+            book.setStock(book.getStock()+1);
+            bookRepository.save(book);
+            
+            savedLoan.setLentTo(loan.getLentTo());
+            loanRepository.save(savedLoan);
+            
+            serviceResponse.setMessage(Constants.MSG_GUARDADO_EXITOSO);
+            serviceResponse.setSuccess(true);
+            serviceResponse.setData(savedLoan);
+
+            return serviceResponse;
+    }
+    
 }

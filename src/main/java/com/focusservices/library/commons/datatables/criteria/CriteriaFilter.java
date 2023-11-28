@@ -1,9 +1,5 @@
 package com.focusservices.library.commons.datatables.criteria;
 
-/** Esta clase guarda el filtro concreto a usar en un criteria query.
- * 
- * @author VOlivares
- */
 public class CriteriaFilter {
     private String nombre;
     private Class<?> clase;

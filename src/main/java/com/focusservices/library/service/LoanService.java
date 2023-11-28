@@ -15,6 +15,7 @@ public interface LoanService {
     Optional<Loan> findById(Integer id);
     ServiceResponse saveValidated(Loan loan);
     ServiceResponse delete(Integer id);
+    ServiceResponse returnBook(Loan loan);
     List<Loan> findAll();
 	
 	// metodos para obtener data como lista

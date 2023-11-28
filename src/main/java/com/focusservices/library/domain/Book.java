@@ -64,15 +64,18 @@ public class Book implements Serializable {
     @Size(max = 512, message = "El campo title excede la longitud permitida")
     private String title; 
 
-
-
     @OneToMany(mappedBy = "book", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @Getter(onMethod = @__(@JsonIgnore))
     @ToString.Exclude
     private Set<Loan> loanes;
 
-
-
-
     // delegates de ids
+    
+    public String getDescriptionForlist() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(this.title);
+    	sb.append(" - ");
+    	sb.append(this.publishedYear);
+    	return sb.toString();
+    }
 }

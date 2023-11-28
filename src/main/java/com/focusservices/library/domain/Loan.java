@@ -52,9 +52,6 @@ public class Loan implements Serializable {
     @JsonFormat(pattern = Constants.DATE_FORMAT)
     private LocalDate lentTo; 
 
-
-
-
     @Getter(onMethod = @__( @JsonIgnore))
     @JoinColumn(name = "id_book", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -66,8 +63,6 @@ public class Loan implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     private User user; 
-
-
 
     // delegates de ids
     public Integer getBookIdDelegate() {
@@ -88,10 +83,13 @@ public class Loan implements Serializable {
     }
     
     public String getBookStDescripcionDelegate() {
+    	StringBuilder sb = new StringBuilder();
         if(book != null) {
-            return book.getGenre();
+        	sb.append(book.getTitle());
+        	sb.append(" - ");
+        	sb.append(book.getPublishedYear());
         }
-        else return "";
+        return sb.toString();
     }
 
     public String getBookSelect2Delegate() {
@@ -106,22 +104,16 @@ public class Loan implements Serializable {
         }
         else return null;
     } 
-
-    public void setUserIdDelegate(Integer id) {
-        if(id != null) {
-            this.user = new User();
-            this.user.setId(id);
-        }
-        else {
-            this.user = null;
-        }
-    }
     
     public String getUserStDescripcionDelegate() {
+    	StringBuilder sb = new StringBuilder();
+    	
         if(user != null) {
-            return user.getFirstName();
+        	sb.append(user.getFirstName());
+        	sb.append(" ");
+        	sb.append(user.getLastName());
         }
-        else return "";
+        return sb.toString();
     }
 
     public String getUserSelect2Delegate() {

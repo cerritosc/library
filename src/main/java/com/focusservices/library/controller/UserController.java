@@ -100,7 +100,7 @@ public class UserController {
         return S2Utils.procesarPeticion(
                 () -> userService.getListByQ(q, pagina)
                 , entrada -> new S2(entrada.getId().toString()
-                        , entrada.getFirstName().toString()
+                		, entrada.getDescriptionForlist()
                         , entrada)
                 , rows
         );

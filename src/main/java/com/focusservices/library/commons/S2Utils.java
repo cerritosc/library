@@ -8,10 +8,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Slice;
 
-/**
- *
- * @author VOlivares
- */
 public class S2Utils {
     
     private S2Utils() {

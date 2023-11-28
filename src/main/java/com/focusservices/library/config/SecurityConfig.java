@@ -14,10 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
-/**
- *
- * @author ASanchez
- */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

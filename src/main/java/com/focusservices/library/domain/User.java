@@ -56,15 +56,18 @@ public class User implements Serializable {
     @Size(max = 1, message = "El campo role excede la longitud permitida")
     private String role; 
 
-
-
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @Getter(onMethod = @__(@JsonIgnore))
     @ToString.Exclude
     private Set<Loan> loanes;
 
-
-
-
     // delegates de ids
+    
+    public String getDescriptionForlist() {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append(this.firstName);
+    	sb.append(" ");
+    	sb.append(this.lastName);
+    	return sb.toString();
+    }
 }

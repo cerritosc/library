@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author ASanchez
- */
 @Setter
 @Getter
 public class SecurityUserDetails implements UserDetails {

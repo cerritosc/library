@@ -100,7 +100,7 @@ public class BookController {
         return S2Utils.procesarPeticion(
                 () -> bookService.getListByQ(q, pagina)
                 , entrada -> new S2(entrada.getId().toString()
-                        , entrada.getGenre().toString()
+                        , entrada.getDescriptionForlist()
                         , entrada)
                 , rows
         );

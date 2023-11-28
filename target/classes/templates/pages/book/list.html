@@ -12,11 +12,11 @@
 <section layout:fragment="content" th:remove="tag">
 <div class="container-fluid">
     <div class="header">
-        <h1 class="header-title" th:inline="text" th:text="#{label.list} + ' ' + 'Book'"></h1>
+        <h1 class="header-title" th:inline="text" th:text="'Books'"></h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="#{label.home}"></a></li>
-                <li class="breadcrumb-item active" aria-current="page" th:inline="text" th:text="#{label.list} + ' '  + 'Book'"></li>
+                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="'Home'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:inline="text" th:text="'Books'"></li>
             </ol>
         </nav>
     </div>
@@ -28,19 +28,19 @@
                     <th:block th:insert="~{fragments/service-response-painter}" th:remove="tag"/>
                     <div class="card-title col-lg-2">
                         <button class="btn btn waves-effect waves-light btn-block btn-info"
-                                th:inline="text" th:onclick="modalToggle()"><i class="fa fa-plus-circle pr-1"></i>[[#{action.new}]]</button>
+                                th:inline="text" th:onclick="modalToggle()"><i class="fa fa-plus-circle pr-1"></i>New</button>
                     </div>
                     <div class="table-responsive">
                         <table id="tblBook" class="table table-hover table-bordered" width="100%">
                             <thead>
                             <tr>
                                 <th>Acciones</th>
-                                <th>id</th>
-                                <th>stock</th>
-                                <th>genre</th>
-                                <th>publishedYear</th>
-                                <th>author</th>
-                                <th>title</th>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Genre</th>
+                                <th>Published year</th>
+                                <th>Stock</th>
                             </tr>
                             </thead>
                         </table>
@@ -63,16 +63,25 @@
                         <div class="card-body">
                             <div class="col-sm-12 col-lg-12">
                                 <div class="form-group row mb-3">
-                                    <label for="stock" class="col-sm-2 text-right control-label col-form-label">stock</label>
+                                    <label for="title" class="col-sm-2 text-right control-label col-form-label">Title</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="stock" name="stock"
-                                                     placeholder="stock"  
-                                                     max="99999999999999999999999999999999"  />
-                                        <span id="stockError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                                     placeholder="title" 
+                                                     maxlength="512" />
+                                        <span id="titleError" style="display: none; color: red;">Campo obligatorio</span>
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="genre" class="col-sm-2 text-right control-label col-form-label">genre</label>
+                                    <label for="author" class="col-sm-2 text-right control-label col-form-label">Author</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="author" name="author"
+                                                     placeholder="author" 
+                                                     maxlength="512" />
+                                        <span id="authorError" style="display: none; color: red;">Campo obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-3">
+                                    <label for="genre" class="col-sm-2 text-right control-label col-form-label">Genre</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="genre" name="genre"
                                                      placeholder="genre" 
@@ -81,10 +90,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="publishedYear" class="col-sm-2 text-right control-label col-form-label">publishedYear</label>
+                                    <label for="publishedYear" class="col-sm-2 text-right control-label col-form-label">Published year</label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
-                                            <input type="text" class="form-control datepicker-initializer" id="publishedYear" name="publishedYear" 
+                                            <input type="text" class="form-control datepicker-initializer" id="publishedYear" name="publishedYear" autocomplete="off"
                                                 placeholder="dd/mm/yyyy"  />
                                             <div class="input-group-append">
                                                 <span class="input-group-text" style="height: 100%;"><i class="fa fa-calendar"></i></span>
@@ -94,21 +103,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label for="author" class="col-sm-2 text-right control-label col-form-label">author</label>
+                                    <label for="stock" class="col-sm-2 text-right control-label col-form-label">Stock</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="author" name="author"
-                                                     placeholder="author" 
-                                                     maxlength="512" />
-                                        <span id="authorError" style="display: none; color: red;">Campo obligatorio</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="title" class="col-sm-2 text-right control-label col-form-label">title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title" name="title"
-                                                     placeholder="title" 
-                                                     maxlength="512" />
-                                        <span id="titleError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <input type="number" class="form-control" id="stock" name="stock"
+                                                     placeholder="stock"  
+                                                     max="99999999999999999999999999999999"  />
+                                        <span id="stockError" style="display: none; color: red;">Campo obligatorio</span>
                                     </div>
                                 </div>
                                 <input type="hidden" id="id" name="id"/>
@@ -175,7 +175,11 @@
                     , searchable: false
                 }
                 , {
-                    data: 'stock'
+                    data: 'title'
+                    , orderable: false
+                }
+                , {
+                    data: 'author'
                     , orderable: false
                 }
                 , {
@@ -188,11 +192,7 @@
                     , filterType: "date"
                 }
                 , {
-                    data: 'author'
-                    , orderable: false
-                }
-                , {
-                    data: 'title'
+                    data: 'stock'
                     , orderable: false
                 }
             ]

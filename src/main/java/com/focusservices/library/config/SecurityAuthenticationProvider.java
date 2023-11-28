@@ -19,10 +19,6 @@ import org.springframework.stereotype.Component;
 import com.focusservices.library.dto.RoleDTO;
 import com.focusservices.library.dto.RolePermisoDTO;
 
-/**
- *
- * @author ASanchez
- */
 @Component
 public class SecurityAuthenticationProvider  implements AuthenticationProvider{
      

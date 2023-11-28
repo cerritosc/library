@@ -11,11 +11,6 @@ import jakarta.persistence.criteria.From;
 import jakarta.persistence.criteria.Predicate;
 import org.slf4j.LoggerFactory;
 
-/** Esta clase contiene las implementaciones de los filtros de CriteriaQuery.
- *  Si se necesita agregar un filtro, este debe ser puesto aqui.
- * 
- * @author VOlivares
- */
 public class FiltrosPorDefecto {
     public static final String PARAMETRO_POR_DEFECTO = "cn";
     public static final List<String> PARAMETROS_EQUALS = Arrays.asList("eq", "=");

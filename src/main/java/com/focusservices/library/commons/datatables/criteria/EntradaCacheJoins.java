@@ -7,12 +7,6 @@ import jakarta.persistence.criteria.From;
 import jakarta.persistence.criteria.Predicate;
 import com.focusservices.library.commons.datatables.mapping.Column;
 
-/** Esta clase guarda los joins creados al hacer un join a una entidad. Estos
- *  joins son guardados temporalmente para evitar crear mas de un join por cada 
- *  entidad relacionada en un query de CriteriaQuery
- * 
- * @author VOlivares
- */
 public class EntradaCacheJoins {
     private From from;
     private CriteriaQuery query;

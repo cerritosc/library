@@ -1,0 +1,135 @@
+<!--decorated page-->
+<html lang="en" dir="ltr"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/basic-layout}">
+
+<head>
+    <title>Usuario</title>
+
+    <!-- Custom CSS from main page-->
+</head>
+<body>
+<section layout:fragment="content" th:remove="tag">
+<div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title" th:inline="text" th:text="'Crear/editar ' + 'Usuario'"></h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="#{label.home}"></a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/ccUsuario}" th:inline="text" th:text="#{label.list} + ' '  + 'Usuario'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Crear/editar Usuario</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Usuario</h4>
+                    <h6 class="card-subtitle">Usuario</h6>
+                </div>
+                <hr class="m-t-0">
+                <form id="formCcUsuario" enctype="multipart/form-data" class="needs-validation needs-validation-manual form-horizontal" novalidate th:action="@{/ccUsuario/save}" th:object="${ccUsuario}" method="POST">
+                    <ul th:if="${#fields.hasErrors('global')}">
+                        <li th:each="err : ${#fields.errors('global')}" th:text="${err}"></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+                                    <label for="cdUsuario" class="col-sm-2 text-right control-label col-form-label">C&oacute;digo Usuario</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="cdUsuario"
+                                                    th:field="*{cdUsuario}" placeholder="C&oacute;digo Usuario" 
+                                                    maxlength="32" th:readonly="*{fcInicio != null}" required>
+                                        <span id="cdUsuarioError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{cdUsuario}"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                        <label for="ccEmpleado" class="col-sm-2 text-right control-label col-form-label">Empleado</label>
+                                        <div class="col-sm-9">
+                                                <select class="select2" id="ccEmpleado" th:field="*{ccEmpleado}" th:readonly="*{fcInicio != null}">
+                                                    <option th:if="${ccUsuario.ccEmpleado != null}" th:value="${ccUsuario.ccEmpleado.skEmpleado}" th:text="*{ccEmpleadoStDescripcionDelegate}" selected="selected"></option>
+                                                </select>
+                                                <span id="ccEmpleadoError" style="display: none; color: red;">Campo obligatorio</span>
+                                                <div th:errors="*{ccEmpleado}"></div>
+                                        </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label for="stObservacion" class="col-sm-2 text-right control-label col-form-label">Observaciones</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" id="stObservacion" rows="10"
+                                                    th:field="*{stObservacion}" placeholder="Observaciones" 
+                                                    maxlength="500" ></textarea>
+                                        <span id="stObservacionError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{stObservacion}"></div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="skUsuario" th:field="*{skUsuario}"/>
+                                <input type="hidden" id="fcCreaFecha" th:field="*{fcCreaFecha}">
+                                <input type="hidden" id="fcModFecha" th:field="*{fcModFecha}">
+                                <input type="hidden" id="stCreaUsuario" th:field="*{stCreaUsuario}">
+                                <input type="hidden" id="stModUsuario" th:field="*{stModUsuario}">
+                                <input type="hidden" id="fcInicio" th:field="*{fcInicio}">
+                                <input type="hidden" id="fcFin" th:field="*{fcFin}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group m-b-0 text-center">
+                            <button type="submit" class="btn btn-info waves-effect waves-light" th:text="#{action.save}"></button>
+                            <button id="cancel" type="button" class="btn btn-danger waves-effect waves-light" th:text="#{action.cancel}"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<section layout:fragment="js" th:remove="tag">
+    <!-- Required libraries -->
+    
+    <script th:inline="javascript">
+        const urlCcEmpleadoSelect2 = /*[[@{/ccEmpleado/s2/sinUsuario}]]*/"";
+    </script>
+    <script>
+    /*DatePicker init*/
+    jQuery('.datepicker-initializer').datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true,
+        orientation: "bottom",
+        language: "es"
+    });
+    /*Select 2 init*/
+    renderSelect2DependData('#ccEmpleado', urlCcEmpleadoSelect2, function() {
+        return {skEmpleado: $("#ccEmpleado").val()};
+    });
+    /* Submit validation, antes de ejecutar la funcion de guardado ajaxSave() */
+     $('#formCcUsuario').submit(function(event){
+        var formulario =  $('#formCcUsuario');
+
+        var validacionBootstrapCorrecta = formulario[0].checkValidity();
+        var validacionManualCorrecta = Validador.validarFormulario(formulario);
+        if (!(validacionBootstrapCorrecta && validacionManualCorrecta)) {
+            // cancels the form submission
+            event.preventDefault();
+            event.stopPropagation();
+        }         
+        formulario.addClass('was-validated');
+    });
+
+    /*Cancel or return button*/
+    $('#cancel').on('click', function () {
+        history.go(-1);
+    } );
+    </script>
+</section>
+</body>
+</html>

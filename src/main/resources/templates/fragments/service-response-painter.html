@@ -1,0 +1,23 @@
+<!--/*
+    Fragmento que facilita la presentacion de mensajes provenientes de un objeto "serviceResponse" .
+    Utiliza los siguiente parametros opcionales:
+            -boolean visual: indica si se usaran iconos visuales o no.
+            -boolean severe: indica si se usara danger o warning para los casos de "serviceResponse.success = false".
+            -string title: el titulo opcional a colocar, usado unicamente cuando "visual = true".
+*/-->
+<div th:fragment="service-response-painter" th:with="visual = ${visual} ?: 'false', severe = ${severe} ?: 'false', title = ${title} ?: 'titulo'">
+    <div th:if="${visual and serviceResponse != null}" class="alert alert-rounded alert-dismissible" th:classappend="${serviceResponse.success}? alert-success : (${severe} ? alert-danger : alert-warning)">
+
+        <h3 th:classappend="${serviceResponse.success}? text-success : (${severe} ? text-danger : text-warning)">
+            <i class="fa " th:classappend="${serviceResponse.success}? fa-check-circle : (${severe} ? fa-exclamation-circle : fa-exclamation-triangle)" ></i>
+            <span th:text="${title!='titulo'} ? ${title} : (${serviceResponse.success}? Exito : (${severe} ? Alerta : Aviso))"></span>
+        </h3>
+        <span class="alert-message" th:text="${serviceResponse.message}"></span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${not visual and serviceResponse != null}" class="alert alert-rounded alert-dismissible" th:classappend="${serviceResponse.success}? alert-success : (${severe} ? alert-danger : alert-warning)">
+
+        <span class="alert-message" th:text="${serviceResponse.message}"></span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>

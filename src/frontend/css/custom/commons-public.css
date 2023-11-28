@@ -1,0 +1,10 @@
+/* Bloqueo de elementos input si se marcan como 'readonly' */
+.form-control:disabled, .form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+input[type=text][readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}

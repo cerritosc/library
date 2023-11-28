@@ -1,0 +1,62 @@
+{
+	"nombre" : "Anda (Spring 6, Java 17)"
+	, "importaciones": [
+			{"origen": "template-include/java/spring6-thymeleaf-java17", "destino": ""}
+	]
+	, "opciones": [
+		{
+			"nombreOpcion": "PROPIEDAD_EXCLUIR_GENERACION_SEGURIDAD"
+			, "descripcion": "Excluir generacion de entidades de seguridad"
+			, "claseBase": "org.proundmega.javagenerator.template.opcion.extras.OpcionVisibleBooleana"
+			, "parametroPorDefecto": false
+			, "nombreOpcionProveedoraParametro": ""
+		}
+		, {
+			"nombreOpcion": "EXCLUIR_PATH_GENERACION_SEGURIDAD"
+			, "descripcion": "Excluir archivos que pertenecen a entidades de seguridad por defecto"
+			, "claseBase": "org.proundmega.javagenerator.template.opcion.extras.SoloIncluirArchivosSiCumpleCondicionOpcion"
+			, "parametroPorDefecto": [
+                            "src/main/java/controller/CcEmpleadoController.java"
+                            , "src/main/java/controller/CcRolController.java"
+                            , "src/main/java/controller/CcUsuarioController.java"
+                            , "src/main/java/controller/SecPrivilegeController.java"
+
+                            , "src/main/java/domain/CcEmpleado.java"
+                            , "src/main/java/domain/CcRol.java"
+                            , "src/main/java/domain/CcUsuario.java"
+                            , "src/main/java/domain/SecPrivilege.java"
+                            , "src/main/java/domain/SecRolePrivilege.java"
+                            , "src/main/java/dto/SecPrivilegePadreDto.java"
+
+                            , "src/main/java/repository/CcEmpleadoRepository.java"
+                            , "src/main/java/repository/CcRolRepository.java"
+                            , "src/main/java/repository/CcUsuarioRepository.java"
+                            , "src/main/java/repository/SecPrivilegeRepository.java"
+                            , "src/main/java/repository/SecRolePrivilegeRepository.java"
+                            , "src/main/java/repository/dto/SecPrivilegePadreDtoRepository.java"
+
+                            , "src/main/java/service/CcEmpleadoService.java"
+                            , "src/main/java/service/CcEmpleadoServiceImpl.java"
+                            , "src/main/java/service/CcRolService.java"
+                            , "src/main/java/service/CcRolServiceImpl.java"
+                            , "src/main/java/service/CcUsuarioService.java"
+                            , "src/main/java/service/CcUsuarioServiceImpl.java"
+                            , "src/main/java/service/SecPrivilegeService.java"
+                            , "src/main/java/service/SecPrivilegeServiceImpl.java"
+                            , "src/main/java/service/SecRolePrivilegeService.java"
+                            , "src/main/java/service/SecRolePrivilegeServiceImpl.java"
+
+                            , "src/main/resources/templates/pages/ccEmpleado/form.html"
+                            , "src/main/resources/templates/pages/ccEmpleado/list.html"
+                            , "src/main/resources/templates/pages/ccRol/assignPrivilege.html"
+                            , "src/main/resources/templates/pages/ccRol/form.html"
+                            , "src/main/resources/templates/pages/ccRol/list.html"
+                            , "src/main/resources/templates/pages/ccUsuario/form.html"
+                            , "src/main/resources/templates/pages/ccUsuario/list.html"
+                            , "src/main/resources/templates/pages/secPrivilege/form.html"
+                            , "src/main/resources/templates/pages/secPrivilege/list.html"
+                        ]
+			, "nombreOpcionProveedoraParametro": "PROPIEDAD_EXCLUIR_GENERACION_SEGURIDAD"
+		}
+	]
+}

@@ -1,0 +1,44 @@
+// fuentes
+@import url('https://fonts.googleapis.com/css?family=Hind+Vadodara:400,500&display=swap');
+@import url('https://indestructibletype.com/fonts/Jost.css');
+
+// variables
+@import "template/variables";
+@import "template/variables-extras";
+
+// librerias
+@import "~bootstrap/scss/bootstrap";
+
+// importacion de archivos de template
+@import "template/style";
+
+// estilos de librerias
+@import "~apexcharts/src/assets/apexcharts";
+@import "~bootstrap-daterangepicker/daterangepicker";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4";
+@import "~datatables.net-responsive-bs4/css/responsive.bootstrap4";
+@import "~datatables.net-select-bs4/css/select.bootstrap4";
+@import "~dragula/dist/dragula";
+@import "~fullcalendar/main";
+@import "~ionicons/dist/scss/ionicons";
+@import "~jsvectormap/dist/css/jsvectormap";
+@import "~quill/dist/quill.bubble";
+@import "~quill/dist/quill.snow";
+@import "~select2/src/scss/core";
+@import "~smartwizard/dist/css/smart_wizard_all";
+@import "~toastr/toastr";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~bootstrap-fileinput/css/fileinput";
+@import "~bootstrap-fileinput/css/fileinput-rtl";
+@import "~bootstrap-duallistbox/dist/bootstrap-duallistbox.css";
+
+// estilos extras de la template
+@import "template/style-vendor";
+
+
+// importacion de archivos personalizados
+@import "custom/commons-public";

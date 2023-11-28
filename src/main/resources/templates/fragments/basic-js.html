@@ -1,0 +1,18 @@
+<script th:inline="javascript">
+    window.DT_LANG_URL = /*[[@{/json/spanish-datatable.json}]]*/;
+</script>
+<script th:src="@{/js/app.js}"></script>
+<script type="text/javascript">
+    ;(function ($) {
+        'use strict';
+        $(function () {
+            var token = $("meta[name='_csrf']").attr("content");
+            var header = $("meta[name='_csrf_header']").attr("content");
+            if (token != "" && header != "") {
+                $(document).ajaxSend(function (e, xhr, options) {
+                    xhr.setRequestHeader(header, token);
+                });
+            }
+        });
+    })(jQuery);
+</script>

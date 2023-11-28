@@ -1,0 +1,128 @@
+<!--decorated page-->
+<html lang="en" dir="ltr"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/basic-layout}">
+
+<head>
+    <title>Privilegio</title>
+
+    <!-- Custom CSS from main page-->
+</head>
+<body>
+<section layout:fragment="content" th:remove="tag">
+<div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title" th:inline="text" th:text="'Crear/editar ' + 'Privilegio'"></h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="#{label.home}"></a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/secPrivilege}" th:inline="text" th:text="#{label.list} + ' '  + 'Privilegio'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Crear/editar Privilegio</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Privilegio</h4>
+                    <h6 class="card-subtitle">Privilegio</h6>
+                </div>
+                <hr class="m-t-0">
+                <form id="formSecPrivilege" enctype="multipart/form-data" class="needs-validation needs-validation-manual form-horizontal" novalidate th:action="@{/secPrivilege/save}" th:object="${secPrivilege}" method="POST">
+                    <ul th:if="${#fields.hasErrors('global')}">
+                        <li th:each="err : ${#fields.errors('global')}" th:text="${err}"></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+                                    <label for="cdprivilege" class="col-sm-2 text-right control-label col-form-label">C&oacute;digo</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="cdprivilege"
+                                                    th:field="*{cdprivilege}" placeholder="C&oacute;digo" 
+                                                    maxlength="32" required>
+                                        <span id="cdprivilegeError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{cdprivilege}"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label for="stdescription" class="col-sm-2 text-right control-label col-form-label">Descripci&oacute;n</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="stdescription"
+                                                    th:field="*{stdescription}" placeholder="Descripci&oacute;n" 
+                                                    maxlength="256" required>
+                                        <span id="stdescriptionError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{stdescription}"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                        <label for="secPrivilege" class="col-sm-2 text-right control-label col-form-label">Privilegio Padre</label>
+                                        <div class="col-sm-9">
+                                                <select class="select2" id="secPrivilegePadreIdDelegate" th:field="*{secPrivilegePadreIdDelegate}">
+                                                    <option th:if="${secPrivilege.secPrivilegePadreIdDelegate != null}" th:value="${secPrivilege.secPrivilegePadreIdDelegate}" th:text="${secPrivilege.secPrivilegePadreStDescripcionDelegate}" selected="selected"></option>
+                                                </select>
+                                                <span id="secPrivilegeError" style="display: none; color: red;">Campo obligatorio</span>
+                                                <div th:errors="*{secPrivilegePadre}"></div>
+                                        </div>
+                                </div>
+
+                                <input type="hidden" th:field="*{skPrivilege}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group m-b-0 text-center">
+                            <button type="submit" class="btn btn-info waves-effect waves-light" th:text="#{action.save}"></button>
+                            <button id="cancel" type="button" class="btn btn-danger waves-effect waves-light" th:text="#{action.cancel}"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<section layout:fragment="js" th:remove="tag">
+    <!-- Required libraries -->
+    
+    <script th:inline="javascript">
+        const urlSecPrivilegeSelect2 = /*[[@{/secPrivilege/cboFilterS2Padre}]]*/"";
+    </script>
+    <script>
+    /*DatePicker init*/
+    jQuery('.datepicker-initializer').datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true,
+        orientation: "bottom",
+        language: "es"
+    });
+    /*Select 2 init*/
+    renderSelect2('#secPrivilegePadreIdDelegate', urlSecPrivilegeSelect2, 5);
+    /* Submit validation, antes de ejecutar la funcion de guardado ajaxSave() */
+     $('#formSecPrivilege').submit(function(event){
+        var formulario =  $('#formSecPrivilege');
+
+        var validacionBootstrapCorrecta = formulario[0].checkValidity();
+        var validacionManualCorrecta = Validador.validarFormulario(formulario);
+        if (!(validacionBootstrapCorrecta && validacionManualCorrecta)) {
+            // cancels the form submission
+            event.preventDefault();
+            event.stopPropagation();
+        }         
+        formulario.addClass('was-validated');
+    });
+
+    /*Cancel or return button*/
+    $('#cancel').on('click', function () {
+        history.go(-1);
+    } );
+    </script>
+</section>
+</body>
+</html>

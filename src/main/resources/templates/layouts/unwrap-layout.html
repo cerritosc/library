@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{fragments/basic-metadata}"/>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE" th:text="#{application.name}"></title>
+    <th:block th:insert="~{fragments/basic-linkcss}"/>
+</head>
+
+<body>
+<th:block th:insert="~{fragments/preloader}"/>
+
+<th:block layout:fragment="content"/>
+
+<th:block th:insert="~{fragments/basic-js}"/>
+
+</body>
+
+</html>

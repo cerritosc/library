@@ -1,0 +1,120 @@
+<!--decorated page-->
+<html lang="en" dir="ltr"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layouts/basic-layout}">
+
+<head>
+    <title>Rol</title>
+
+    <!-- Custom CSS from main page-->
+</head>
+<body>
+<section layout:fragment="content" th:remove="tag">
+<div class="container-fluid">
+    <div class="header">
+        <h1 class="header-title" th:inline="text" th:text="'Crear/editar ' + 'Rol'"></h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/index}" th:inline="text" th:text="#{label.home}"></a></li>
+                <li class="breadcrumb-item" aria-current="page"><a th:href="@{/ccRol}" th:inline="text" th:text="#{label.list} + ' '  + 'Rol'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Crear/editar Rol</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Rol</h4>
+                    <h6 class="card-subtitle">Rol</h6>
+                </div>
+                <hr class="m-t-0">
+                <form id="formCcRol" enctype="multipart/form-data" class="needs-validation needs-validation-manual form-horizontal" novalidate th:action="@{/ccRol/save}" th:object="${ccRol}" method="POST">
+                    <ul th:if="${#fields.hasErrors('global')}">
+                        <li th:each="err : ${#fields.errors('global')}" th:text="${err}"></li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="form-group row">
+                                    <label for="stDescripcion" class="col-sm-2 text-right control-label col-form-label">Descripci&oacute;n</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="stDescripcion"
+                                                    th:field="*{stDescripcion}" placeholder="Descripci&oacute;n" 
+                                                    maxlength="200" required>
+                                        <span id="stDescripcionError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{stDescripcion}"></div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label for="cdRol" class="col-sm-2 text-right control-label col-form-label">C&oacute;digo de Rol</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="cdRol"
+                                                    th:field="*{cdRol}" placeholder="C&oacute;digo de Rol" 
+                                                    maxlength="50" th:readonly="*{bnEstado}">
+                                        <span id="cdRolError" style="display: none; color: red;">Campo obligatorio</span>
+                                        <div th:errors="*{cdRol}"></div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" th:field="*{skRol}"/>
+                                <input type="hidden" id="fcCreaFecha" th:field="*{fcCreaFecha}">
+                                <input type="hidden" id="fcModFecha" th:field="*{fcModFecha}">
+                                <input type="hidden" id="stCreaUsuario" th:field="*{stCreaUsuario}">
+                                <input type="hidden" id="stModUsuario" th:field="*{stModUsuario}">
+                                <input type="hidden" id="stModUsuario" th:field="*{bnEstado}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group m-b-0 text-center">
+                            <button type="submit" class="btn btn-info waves-effect waves-light" th:text="#{action.save}"></button>
+                            <button id="cancel" type="button" class="btn btn-danger waves-effect waves-light" th:text="#{action.cancel}"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<section layout:fragment="js" th:remove="tag">
+    <!-- Required libraries -->
+    
+    <script th:inline="javascript">
+    </script>
+    <script>
+    /*DatePicker init*/
+    jQuery('.datepicker-initializer').datepicker({
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true,
+        orientation: "bottom",
+        language: "es"
+    });
+    /*Select 2 init*/
+    /* Submit validation, antes de ejecutar la funcion de guardado ajaxSave() */
+     $('#formCcRol').submit(function(event){
+        var formulario =  $('#formCcRol');
+
+        var validacionBootstrapCorrecta = formulario[0].checkValidity();
+        var validacionManualCorrecta = Validador.validarFormulario(formulario);
+        if (!(validacionBootstrapCorrecta && validacionManualCorrecta)) {
+            // cancels the form submission
+            event.preventDefault();
+            event.stopPropagation();
+        }         
+        formulario.addClass('was-validated');
+    });
+
+    /*Cancel or return button*/
+    $('#cancel').on('click', function () {
+        history.go(-1);
+    } );
+    </script>
+</section>
+</body>
+</html>

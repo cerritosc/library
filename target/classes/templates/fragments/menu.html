@@ -1,0 +1,27 @@
+<nav id="sidebar" class="sidebar" xmlns:th="http://www.thymeleaf.org">
+    <a class="sidebar-brand" th:href="@{/index}">
+        
+    </a>
+    <div class="sidebar-content">
+        <div class="sidebar-user">
+            
+            <div class="fw-bold">Usuario: [[${#authentication.getPrincipal().getUsername()}]]</div>
+            
+        </div>
+
+        <ul class="sidebar-nav" id="activitiesMenu">
+            
+            <li class="sidebar-item active">
+                <a data-bs-target="#flujo" data-bs-toggle="collapse" class="sidebar-link">
+                    <i class="align-middle me-2 fas fa-stream"></i> <span
+                        class="align-middle">Options</span>
+                </a>
+                <ul id="flujo" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
+                    <li class="sidebar-item"><a class="sidebar-link" th:href="@{/loan}">Loan</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" th:href="@{/book}">Book</a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" th:href="@{/user}">User</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -16,26 +16,31 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import com.focusservices.library.domain.User;
 import com.focusservices.library.dto.RoleDTO;
 import com.focusservices.library.dto.RolePermisoDTO;
+import com.focusservices.library.service.UserService;
 
 @Component
 public class SecurityAuthenticationProvider  implements AuthenticationProvider{
      
+	@Autowired
+	UserService userService;
      
     private SecurityUserDetails dbAuthentication(String userName) throws BadCredentialsException {
         try {
             // TODO implementar acorde a lo requerido
-//            Optional<SecUser> userOpt = secUserService.findByCuser(userName);
-//            
-//            if(!userOpt.isPresent()){
-//                 throw new BadCredentialsException("Usuario no encontrado");
-//            }
-//            
-//            SecUser user = userOpt.get();
+            Optional<User> userOpt = userService.findByMail(userName);
+            
+            if(!userOpt.isPresent()){
+                 throw new BadCredentialsException("User not found");
+            }
+            
+            User user = userOpt.get();
 
             SecurityUserDetails securityUser = new SecurityUserDetails();
             securityUser.setCuser(userName);
+            securityUser.setRole(user.getRole());
             
             
 //            List<RolePermisoDTO> roles = secUserService.getRolesDeUsuario(userName);

@@ -15,7 +15,7 @@
                         <div class="text-center mt-4">
                             
                             <p class="lead">
-                                Ingresa a tu cuenta
+                                log in
                             </p>
                         </div>
 
@@ -42,16 +42,16 @@
                                     </div>
                                     <form th:action="@{/login}" method="post">
                                         <div class="mb-3">
-                                            <label>Usuario</label>
+                                            <label>User</label>
                                             <input class="form-control form-control-lg" type="text" name="username"
                                                    placeholder="Ingresa tu usuario"/>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Contrase&ntilde;a</label>
+                                            <label>Password</label>
                                             <input class="form-control form-control-lg" type="password" name="password"
                                                    placeholder="Ingresa tu contrase&ntilde;a"/>
                                             <small>
-                                                <a href="pages-reset-password.html">Olvidaste tu Contrase&ntilde;a?</a>
+                                                <a href="pages-reset-password.html">forgot?</a>
                                             </small>
                                         </div>
                                         <div>
@@ -59,11 +59,11 @@
                                                 <input id="customControlInline" type="checkbox" class="form-check-input"
                                                        value="remember-me" name="remember-me"
                                                        checked>
-                                                <label class="form-check-label text-small" for="customControlInline">Recordarme</label>
+                                                <label class="form-check-label text-small" for="customControlInline">Remember me</label>
                                             </div>
                                         </div>
                                         <div class="text-center mt-3">
-                                            <button type="submit" class="btn btn-lg btn-primary">Ingresar</button>
+                                            <button type="submit" class="btn btn-lg btn-primary">Log in</button>
                                             <!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
                                         </div>
                                     </form>

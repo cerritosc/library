@@ -13,4 +13,6 @@ public interface UserRepository extends DataTablesRepository<User, Integer> {
    
 
         Slice<User> findByFirstNameIgnoreCaseContaining(String q, Pageable page);
+        
+        Optional<User> findByEmail(String email);
 }

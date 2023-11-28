@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService {
             return userRepository.findById(id);
     }
 
-
     @Override
     public ServiceResponse saveValidated(User user) {
             ServiceResponse serviceResponse = new ServiceResponse(false, Constants.MSG_EXCEPCION_ACCION);
@@ -87,5 +86,11 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public DataTablesOutput<User> findAll(DataTablesInput input) {
             return userRepository.findAll(input);
+    }
+    
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public Optional<User> findByMail(String mail) {
+            return userRepository.findByEmail(mail);
     }
 }

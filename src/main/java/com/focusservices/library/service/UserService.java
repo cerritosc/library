@@ -16,6 +16,7 @@ public interface UserService {
     ServiceResponse saveValidated(User user);
     ServiceResponse delete(Integer id);
     List<User> findAll();
+    Optional<User> findByMail(String mail);
 	
 	// metodos para obtener data como lista
     Slice<User> getList(Integer page, Integer rows);

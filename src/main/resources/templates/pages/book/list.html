@@ -27,8 +27,11 @@
                 <div class="card-body">
                     <th:block th:insert="~{fragments/service-response-painter}" th:remove="tag"/>
                     <div class="card-title col-lg-2">
+						
+						<div th:if="${#authentication.getPrincipal().isLibrarian()}">
                         <button class="btn btn waves-effect waves-light btn-block btn-info"
                                 th:inline="text" th:onclick="modalToggle()"><i class="fa fa-plus-circle pr-1"></i>New</button>
+                    	</div>
                     </div>
                     <div class="table-responsive">
                         <table id="tblBook" class="table table-hover table-bordered" width="100%">
@@ -164,7 +167,6 @@
                         var id = row.id;
                         return '<div class="button-group" style="display: inline-flex;">' +
                                     '<button title="Editar" class="btn waves-effect waves-light btn-success" type="button" onClick="ajaxEdit(\'' + id + '\')" id="btnEditar_' + id + '" > <i class="fa fa-pencil-alt"></i></button>' +
-                                    '<button title="Eliminar" class="btn waves-effect waves-light btn-danger" type="button" onClick="ajaxDelete(\'' + id + '\')" id="btnEliminar_' + id + '" > <i class="fa fa-trash"></i> </button>' +
                                 '</div>';
                     }
                 }

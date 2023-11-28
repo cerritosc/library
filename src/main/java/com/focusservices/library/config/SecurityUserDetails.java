@@ -23,6 +23,7 @@ public class SecurityUserDetails implements UserDetails {
      */
     private static final long serialVersionUID = 1L;
     private String cuser;
+    private String role;
     private List<Auth> authorities = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
 
@@ -93,6 +94,10 @@ public class SecurityUserDetails implements UserDetails {
             return this.name;
         }
 
+    }
+    
+    public boolean isLibrarian() {
+        return "L".equals(this.role)? true : false;
     }
 
 }
